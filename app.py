@@ -9,6 +9,8 @@ app.secret_key = 'dev-secret-key-selection-app-2026'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+with app.app_context():
+    db.create_all()
 
 # ==========================================
 # 📊 データベースのテーブル（モデル）定義
