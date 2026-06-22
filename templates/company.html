@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>{% if es_data %}企業情報の編集{% else %}新しい企業の追加{% endif %} - 自己分析・ES管理シートアプリ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='company.css') }}">
+</head>
+<body>
+
+    <h1>{% if es_data %}企業情報の編集{% else %}新しい企業の追加{% endif %}</h1>
+    <div class="first" style="text-align: center; color: #7f8c8d; margin-bottom: 20px;">
+        選考を受ける企業の情報を登録・編集し、提出するESの内容を整理しましょう。
+    </div>
+
+    <form action="/company/edit/{{ company_id }}" method="POST" class="analysis-form">
+        
+        <h2>企業基本情報</h2>
+        
+        <div class="form-group">
+            <label for="company_name">企業名</label>
+            <input type="text" id="company_name" name="company_name" 
+                   style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; background-color: #f8fafc; font-size: 1rem;" 
+                   placeholder="例：〇〇株式会社" 
+                   value="{{ es_data.company_name | default('', true) }}" required>
+        </div>
+
+        <div class="form-group" style="margin-top: 25px;">
+            <label for="policy">企業の方針・求める人物像</label>
+            <textarea id="policy" name="policy" placeholder="例：顧客第一主義、挑戦を恐れない人材、技術力で社会に貢献など、企業研究で得た方針をメモしてください。">{{ es_data.policy | default('', true) }}</textarea>
+        </div>
+
+        <div class="form-group" style="margin-top: 25px;">
+            <label for="intern_info">インターン情報</label>
+            <textarea id="intern_info" name="intern_info" placeholder="例：8月開催の3Daysインターン（選考あり：ES+面接）。優秀者には早期選考の特典あり。">{{ es_data.intern_info | default('', true) }}</textarea>
+        </div>
+
+        <div class="save-btn-container" style="text-align: center; margin-top: 40px;">
+            <input type="submit" value="{% if es_data %}変更を保存する{% else %}企業を追加する{% endif %}" class="save-btn">
+        </div>
+
+        <div class="back-link" style="text-align: center; margin-top: 25px;">
+            <a href="/Dashboard" style="color: #7f8c8d; text-decoration: none; font-size: 0.95rem;">← ダッシュボードに戻る</a>
+        </div>
+
+    </form>
+
+</body>
+</html>

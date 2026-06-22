@@ -1,0 +1,165 @@
+@charset "UTF-8";
+
+body{
+  margin: 20px 0;
+}
+
+.wrapper-1080{
+  max-width: 1120px;
+  padding: 60px 100px;
+  margin: 0 auto;
+}
+
+main{
+  background-color:skyblue;
+  clip-path: polygon(0 0, 100% 0, 100% 100%,0 80%);
+  padding: 80px 0 160px;
+  margin-bottom:80px;
+}
+
+h1{
+ font-size: 40px;
+ text-align: center;
+}
+
+.text{
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+.catchphrase{
+  font-size: 36px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  padding-left: 170px;
+}
+
+.catchphrase span{
+  background-color:white;
+  display: inline-block;
+  margin-bottom:10px ;
+}
+
+.rogu{
+  display: block;
+  background-color: white;
+
+  border: 2px solid black; /* 四角の線 */
+
+  padding: 15px;
+  width: 100px;
+  text-align: center;
+
+  text-decoration: none;
+  color: black;
+  margin-bottom: 20px;
+}
+
+.toroku{
+  display: block;
+  background-color: white;
+
+  border: 2px solid black; /* 四角の線 */
+
+  padding: 15px;
+  width: 100px;
+  text-align: center;
+
+  text-decoration: none;
+  color: black;
+}
+
+
+
+/*-------------------------------------------section(reason)---------------------------------*/
+.wrapper{
+max-width: 940px;
+padding: 0 20px;
+margin: 0 auto;
+}
+
+ul{
+  list-style: none;
+}
+
+.section-title{
+  font-size: 28px;
+  font-weight:600;
+margin-bottom: 80px;
+text-align: center;
+position: relative;
+}
+
+.section-title::after{
+  content: "";
+  width: 80px;
+  height: 2px;
+  background-color: #000;
+  margin: 0 auto;
+  position: absolute;
+  bottom: -20px;
+  left:0;
+  right: 0;
+}
+
+.readon
+{
+  margin-bottom: 80px;
+
+}
+.reason .item{
+  display: flex;
+  justify-content: space-between;
+}
+.reason .item li{
+width: 30%;
+max-width: 250px;
+margin-right: 5%;
+text-align: center;
+}
+
+img {
+  width: 200px;
+  height: 180px;
+}
+
+.reason .item li:last-child{
+margin-right: 0;
+}
+
+.reason .item li .img{
+  margin-bottom: 20px;
+}
+
+
+.reason .item li .title{
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.reason p {
+  margin: 0;
+}
+
+/*-----------------------------------------section(merit)------------------------------------------*/
+.merit{
+  margin-top: 100px;
+  background-color:skyblue;
+  clip-path: polygon(0 0, 100% 15%, 100% 85%,0 100%);
+  padding: 80px 0 160px;
+  margin-bottom:80px;
+}
+
+h3{
+  font-size: 36px;
+  padding-left: 250px;
+}
+
+.subitem{
+  margin-top: 30px;
+  padding-left: 250px;
+  font-size: 28px;
+}

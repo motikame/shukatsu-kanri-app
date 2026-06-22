@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ダッシュボード - 自己分析・ES管理シートアプリ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='Dashboard.css') }}">
+</head>
+<body>
+
+  <header class="dash-header">
+    <h1>ダッシュボード</h1>
+    <div class="first">
+      こんにちは、<strong>{{ user.username }}</strong> さん。今日の就職活動の進捗を確認しましょう。
+    </div>
+  </header>
+
+  <section class="menu-section">
+    <ul class="category-row">
+      <li>
+        <a href="/basic" class="menu-btn btn-blue">👤 基本情報の確認・編集</a>
+      </li>
+      <li>
+        <a href="/analysis" class="menu-btn btn-green">📝 自己分析シートを開く</a>
+      </li>
+    </ul>
+  </section>
+
+  <section class="company-list-section">
+    <div class="list-header">
+      <h2>エントリー企業管理シート</h2>
+      <a href="/company/edit/0" class="add-btn">＋ 新しい企業を追加</a>
+    </div>
+
+    {% if not companies %}
+      <div class="empty-message">
+        <p class="empty-title">まだ企業が登録されていません</p>
+        <p class="empty-sub">「新しい企業を追加」ボタンから、選考を受けている企業を登録しましょう！</p>
+      </div>
+    {% else %}
+    
+      <table class="company-table">
+        <thead>
+          <tr>
+            <th>企業名</th>
+            <th>選考ステータス</th>
+            <th class="text-right">アクション</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for company in companies %}
+            <tr>
+              <td class="company-name">{{ company.company_name }}</td>
+              <td>
+                <span class="status-badge">{{ company.status }}</span>
+              </td>
+              <td class="text-right" style="display: flex; justify-content: flex-end; gap: 15px; align-items: middle;">
+                <a href="/company/edit/{{ company.id }}" class="detail-btn">詳細・ES編集 →</a>
+                
+                <form action="/company/delete/{{ company.id }}" method="POST" style="margin: 0;" onsubmit="return confirm('本当にこの企業データを削除してもよろしいですか？');">
+                  <button type="submit" class="delete-btn" style="background: none; border: none; color: #e74c3c; cursor: pointer; font-weight: bold; font-size: 0.95rem; padding: 0; font-family: inherit;">
+                    ❌ 削除
+                  </button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      
+    {% endif %}
+  </section>
+
+</body>
+</html>

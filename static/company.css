@@ -1,0 +1,139 @@
+body {
+    background-color: #f5f7fa;
+    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+    color: #333333;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 40px;
+    color: #2c3e50;
+    font-size: 2rem;
+}
+
+.es-form {
+    max-width: 800px;
+    margin: 30px auto 60px auto;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    box-sizing: border-box;
+}
+
+.es-form h2 {
+    font-size: 1.3rem;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    color: #10ac84; /* ES管理は少しフレッシュなグリーン系の線に */
+    border-bottom: 2px solid #10ac84;
+    padding-bottom: 6px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: #34495e;
+}
+
+/* 企業名を入れる一行の入力欄（input）のスタイル */
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    background-color: #f8fafc;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.form-group input[type="text"]:focus {
+    border-color: #10ac84;
+    background-color: #ffffff;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(16, 172, 132, 0.1);
+}
+
+/* 複数行を入れるエリア（textarea）のスタイル */
+.form-group textarea {
+    width: 100%;
+    height: 110px;
+    padding: 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    resize: vertical;
+    font-family: inherit;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    box-sizing: border-box;
+    background-color: #f8fafc;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.form-group textarea:focus {
+    border-color: #10ac84;
+    background-color: #ffffff;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(16, 172, 132, 0.1);
+}
+
+/* インターン情報と締め切りの横並び（Flexbox） */
+.row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.col {
+    flex: 1;
+}
+
+.save-btn-container {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.save-btn {
+    background: #10ac84;
+    color: white;
+    border: none;
+    padding: 14px 60px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.save-btn:hover {
+    background: #0f9b75;
+}
+
+.save-btn:active {
+    transform: scale(0.98);
+}
+
+.back-link {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.back-link a {
+    color: #7f8c8d;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.back-link a:hover {
+    color: #2c3e50;
+    text-decoration: underline;
+}

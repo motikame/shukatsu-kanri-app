@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>基本情報 - 自己分析・ES管理シートアプリ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='basic.css') }}">
+</head>
+<body>
+
+    <h1>基本情報の設定</h1>
+    <div class="first" style="text-align: center; color: #7f8c8d; margin-bottom: 20px;">
+        履歴書やマイページ登録でよく使う情報を保存しておけます。
+    </div>
+
+    <form action="/basic" method="POST" class="analysis-form">
+        
+        <h2>プロフィール基本情報</h2>
+        
+        <div class="form-group">
+            <label for="phone">電話番号</label>
+            <input id="phone" type="tel" name="phone" value="{{ user.phone | default('', true) }}" placeholder="例：090-XXXX-XXXX">
+        </div>
+
+        <div class="form-group">
+            <label for="postal">郵便番号</label>
+            <input id="postal" type="text" name="postal" value="{{ user.postal | default('', true) }}" placeholder="例：123-4567">
+        </div>
+
+        <div class="form-group">
+            <label for="address">現住所</label>
+            <input id="address" type="text" name="address" value="{{ user.address | default('', true) }}" placeholder="例：〇〇県〇〇市...">
+        </div>
+
+
+        <h2>学歴（卒業・入学年度）</h2>
+        
+        <div class="form-group">
+            <label for="high_school">高校 卒業年月</label>
+            <input id="high_school" type="month" name="high_school" value="{{ user.high_school | default('', true) }}">
+        </div>
+
+        <div class="form-group">
+            <label for="university_in">大学 入学年月</label>
+            <input id="university_in" type="month" name="university_in" value="{{ user.university_in | default('', true) }}">
+        </div>
+
+        <div class="form-group">
+            <label for="university_out">大学 卒業見込み年月</label>
+            <input id="university_out" type="month" name="university_out" value="{{ user.university_out | default('', true) }}">
+        </div>
+
+
+        <h2>保有資格・スキル</h2>
+        
+        <div class="form-group">
+            <label>資格・スキル 1</label>
+            <input type="text" name="license1" value="{{ user.license1 | default('', true) }}" placeholder="例：普通自動車第一種運転免許（2025年5月取得）">
+        </div>
+
+        <div class="form-group">
+            <label>資格・スキル 2</label>
+            <input type="text" name="license2" value="{{ user.license2 | default('', true) }}" placeholder="例：TOEIC L&R 650点（2025年12月取得）">
+        </div>
+
+        <div class="form-group">
+            <label>資格・スキル 3</label>
+            <input type="text" name="license3" value="{{ user.license3 | default('', true) }}" placeholder="例：ITパスポート試験（2026年4月取得）">
+        </div>
+
+
+        <div class="save-btn-container" style="text-align: center; margin-top: 40px;">
+            <input type="submit" value="変更を保存する" class="save-btn">
+        </div>
+
+        <div class="back-link" style="text-align: center; margin-top: 25px;">
+            <a href="/Dashboard" style="color: #7f8c8d; text-decoration: none; font-size: 0.95rem;">← ダッシュボードに戻る</a>
+        </div>
+
+    </form>
+
+</body>
+</html>

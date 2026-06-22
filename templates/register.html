@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>新規登録</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">
+</head>
+
+<body>
+<section class="register">
+<h1 class="section-title">新規登録</h1>
+<form action="/register" method="POST">
+<dt><label for="name">ユーザー名</label></dt>
+<dd><input id="name" type="text" name="username"></dd>
+<dt><label for="mail">メールアドレス</label></dt>
+<dd><input id="mail" type="email" name="mail"></dd>
+<dt><label for="pass">パスワード</label></dt>
+<dd><input type="password" id="pass" type="text" name="pass"></dd>
+<dt><label for="repass">パスワード確認用</label></dt>
+<dd><input type="password" id="repass" type="text" name="repass"></dd><br>
+<div class="btn"><input type="submit" value="送信する"></div>
+</form>
+</section>
+</body>
+</html>

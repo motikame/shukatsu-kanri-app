@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>自己分析・ES管理シートアプリ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <main class="inner wrapper-1080">
+        <h1>自己分析・ES管理シート</h1>
+        <div class="text">
+            <p class="catchphrase">
+                <span>就職活動をもっと</span><br><span>わかりやすく</span><br>
+                <span>整理しよう</span>
+
+
+            </p>
+            <div class="rogugamen">
+                <a href="/login" class="rogu">ログイン</a>
+                <a href="/register" class="toroku">新規登録</a>
+            </div>
+
+
+
+
+        </div>
+
+
+    </main>
+    <section class="reason wrapper">
+        <h2 class="section-title">選ばれる理由</h2>
+        <ul class="item">
+            <li>
+                <div class="img">
+                    <img src="{{ url_for('static', filename='images/undraw_analyze_gcbr.png') }}">
+                </div>
+                <p class="title">自己分析</p>
+                <p> 提出状況を記録</p><br>
+                <p>
+                    締め切り管理</p>
+
+            </li>
+
+
+
+            <li>
+                <div class="img">
+                    <img src="{{ url_for('static', filename='images/undraw_database-tables_yft5.png') }}">
+                </div>
+                <p class="title">ES管理シート</p>
+                <p> 強み弱み保存</p><br>
+                <p>
+                    ガクチカ管理</p>
+            </li>
+
+            <li>
+                <div class="img">
+                    <img src="{{ url_for('static', filename='images/undraw_schedule-cleanup_1xs7.png') }}">
+                </div>
+                <p class="title">選考管理</p>
+                <p> 面接進捗</p><br>
+                <p>
+                    企業一覧</p>
+            </li>
+
+        </ul>
+    </section>
+
+    <section class="merit">
+        <h3>利用メリット</h3>
+        <ul class="subitem">
+            <li>
+                <p class="merit-text">1.就職活動を一元管理することができる</p>
+            </li>
+
+            <li>
+                <p class="merit-text">2.ESの使いまわしがしやすい</p>
+            </li>
+
+            <li>
+                <p class="merit-text">3.選考状況が把握しやすい</p>
+            </li>
+        </ul>
+
+    </section>
+
+
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>自己分析シート - 自己分析・ES管理シートアプリ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='Self-analysis.css') }}">
+</head>
+<body>
+
+    <h1>自己分析シート</h1>
+    <div class="first" style="text-align: center; color: #7f8c8d; margin-bottom: 20px;">
+        過去・現在・未来の流れでエピソードを整理し、一貫性のある就活の軸を作りましょう。
+    </div>
+
+    <form action="/analysis" method="POST" class="analysis-form">
+        
+        <h2>1. 過去（経験と実績）</h2>
+        
+        <div class="form-group">
+            <label for="gatutika">学生時代にがんばったこと（ガクチカ）</label>
+            <textarea id="gatutika" name="gatutika" style="height: 150px;" placeholder="例：大学3年時に就活支援向けのWebアプリケーションを個人で開発し、〇〇の機能を実装しました。">{{ analysis.gatutika | default('', true) }}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="hardship">これまでに直面した最大の困難と乗りこえ方</label>
+            <textarea id="hardship" name="hardship" placeholder="例：開発中に〇〇の重大なバグが発生した際、公式ドキュメントを読み込み、設計を見直すことで解決しました。">{{ analysis.hardship | default('', true) }}</textarea>
+        </div>
+
+
+        <h2>2. 現在（自己理解）</h2>
+
+        <div class="form-group">
+            <label for="personality_strength">自分の性格と強み</label>
+            <textarea id="personality_strength" name="personality_strength" placeholder="例：私の強みは、困難な状況でも冷静にデバッグを続けられる粘り強さです。">{{ analysis.personality_strength | default('', true) }}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="weakness_control">自分の弱みとそれを補うために意識していること</label>
+            <textarea id="weakness_control" name="weakness_control" placeholder="例：一人で抱え込みがちなので、30分考えて解決しないエラーは同期に相談するルールにしています。">{{ analysis.weakness_control | default('', true) }}</textarea>
+        </div>
+
+        <div class="row">
+            <div class="form-group col">
+                <label for="pros">長所（箇条書きでもOK）</label>
+                <textarea id="pros" name="pros" placeholder="例：継続力、計画性、デバッグの粘り強さ">{{ analysis.pros | default('', true) }}</textarea>
+            </div>
+            <div class="form-group col">
+                <label for="cons">短所（箇条書きでもOK）</label>
+                <textarea id="cons" name="cons" placeholder="例：心配性、こだわりが強い、抱え込みがち">{{ analysis.cons | default('', true) }}</textarea>
+            </div>
+        </div>
+
+
+        <h2>3. 未来と周囲との関わり</h2>
+
+        <div class="form-group">
+            <label for="team_experience">チームでの経験（周囲との関わり方）</label>
+            <textarea id="team_experience" name="team_experience" placeholder="例：大学のグループワークや共同開発で、進捗管理を担当し納期通りに完成させました。">{{ analysis.team_experience | default('', true) }}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="future_vision">将来どんな自分でありたい？</label>
+            <textarea id="future_vision" name="future_vision" placeholder="例：技術的な視点だけでなく、ユーザーの課題解決に寄り添えるエンジニアになりたいです。">{{ analysis.future_vision | default('', true) }}</textarea>
+        </div>
+
+        <div class="form-group" style="margin-top: 30px;">
+            <label for="memo">自由なメモ欄（面接の反省やネタなど）</label>
+            <textarea id="memo" name="memo" style="height: 120px;" placeholder="思いついたことや、面接でのフィードバックなどを自由に書き留めてください。">{{ analysis.memo | default('', true) }}</textarea>
+        </div>
+
+
+        <div class="save-btn-container">
+            <input type="submit" value="自己分析を保存する" class="save-btn">
+        </div>
+
+        <div class="back-link">
+            <a href="/Dashboard">← ダッシュボードに戻る</a>
+        </div>
+
+    </form>
+
+</body>
+</html>
