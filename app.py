@@ -47,7 +47,7 @@ class User(db.Model):
     personality_strength = db.Column(db.Text)  # 性格と強み
     weakness_control = db.Column(db.Text)      # 弱みと意識
     gatutika = db.Column(db.Text)              # ガクチカ
-    hardship = db.Column(db.Text)              # 困難と乗り跨え方
+    hardship = db.Column(db.Text)              # 困難と乗り越え方
     future_vision = db.Column(db.Text)         # 将来どんな自分でありたい
     pros = db.Column(db.Text)                  # 長所
     cons = db.Column(db.Text)                  # 短所
@@ -111,8 +111,157 @@ def register():
             
         existing_user = User.query.filter_by(username=username).first()
         if existing_user:
-            return
+            return "<h1>エラー: そのユーザー名は既に存在します</h1>"
+        
+        # パスワードを暗号化
+        hashed_password = generate_password_hash(password)
+        
+        # データベースに新規登録
+        new_user = User(username=username, email=mail, password=hashed_password)
+        db.session.add(new_user)
+        db.session.commit()
+        
+        print(f"SQLに登録成功: {username}")
+        return redirect(url_for("login"))
+
+    return render_template("register.html")
+
+
+@app.route("/Dashboard")
+def Dashboard():
+    user_id = session.get("user_id")
+    if not user_id:
+        return redirect(url_for("login"))
+        
+    current_user = User.query.get(user_id)
+    # ログイン中のユーザーの企業データを全件取得
+    user_companies = CompanyES.query.filter_by(user_id=user_id).all()
+    
+    return render_template("Dashboard.html", user=current_user, companies=user_companies)
+
+
+@app.route("/basic", methods=["GET", "POST"])
+def basic():
+    user_id = session.get("user_id")
+    if not user_id:
+        return redirect(url_for("login"))
+    
+    current_user = User.query.get(user_id)
+
+    if current_user is None:
+        session.clear()
+        return redirect(url_for("login"))
+
+    if request.method == "POST":
+        current_user.phone = request.form["phone"]
+        current_user.postal = request.form["postal"]
+        current_user.address = request.form["address"]
+        current_user.high_school = request.form["high_school"]
+        current_user.university_in = request.form["university_in"]
+        current_user.university_out = request.form["university_out"]
+        current_user.license1 = request.form["license1"]
+        current_user.license2 = request.form["license2"]
+        current_user.license3 = request.form["license3"]
+        
+        db.session.commit()
+        return redirect(url_for("basic"))
+
+    return render_template("basic.html", user=current_user)
+
+
+@app.route("/analysis", methods=["GET", "POST"])
+def analysis():
+    user_id = session.get("user_id")
+    if not user_id:
+        return redirect(url_for("login"))
+    
+    current_user = User.query.get(user_id)
+    if current_user is None:
+        session.clear()
+        return redirect(url_for("login"))
+
+    if request.method == "POST":
+        current_user.personality_strength = request.form["personality_strength"]
+        current_user.weakness_control = request.form["weakness_control"]
+        current_user.gatutika = request.form["gatutika"]
+        current_user.hardship = request.form["hardship"]
+        current_user.future_vision = request.form["future_vision"]
+        current_user.pros = request.form["pros"]
+        current_user.cons = request.form["cons"]
+        current_user.team_experience = request.form["team_experience"]
+        current_user.memo = request.form["memo"]
+        
+        db.session.commit()
+        return redirect(url_for("Dashboard")) 
+
+    return render_template("Self-analysis.html", analysis=current_user)
+
+
+@app.route("/company/edit/<int:company_id>", methods=["GET", "POST"])
+def edit_company(company_id):
+    user_id = session.get("user_id")
+    if not user_id:
+        return redirect(url_for("login"))
+    
+    # 新規登録(0)か編集(1以上)かを切り替え
+    if company_id == 0:
+        es_data = None
+    else:
+        es_data = CompanyES.query.filter_by(id=company_id, user_id=user_id).first()
+        if not es_data:
+            return "企業データが見つかりません", 404
+
+    if request.method == "POST":
+        if company_id == 0:
+            # 新規登録の処理（方針やインターン情報もしっかりキャッチして保存する）
+            es_data = CompanyES(
+                user_id=user_id, 
+                company_name=request.form["company_name"],
+                status="選考中",
+                policy=request.form["policy"],
+                intern_info=request.form["intern_info"]
+            )
+            db.session.add(es_data)
+        else:
+            # 既存編集の処理（すべての変更を上書き）
+            es_data.company_name = request.form["company_name"]
+            es_data.policy = request.form["policy"]
+            es_data.intern_info = request.form["intern_info"]
+            
+        db.session.commit() # データベースの書き換えを確定
+        return redirect(url_for("Dashboard"))
+        
+    return render_template("company.html", es_data=es_data, company_id=company_id)
+
+
+@app.route("/company/delete/<int:company_id>", methods=["POST"])
+def delete_company(company_id):
+    user_id = session.get("user_id")
+    if not user_id:
+        return redirect(url_for("login"))
+    
+    # 削除したい企業データをデータベースから探す
+    company = CompanyES.query.filter_by(id=company_id, user_id=user_id).first()
+    
+    if company:
+        db.session.delete(company) # データベースから削除
+        db.session.commit()        # 変更を確定！
+        print(f"企業データを削除しました: {company.company_name}")
+        
+    return redirect(url_for("Dashboard"))
+
+
+# ==========================================
+# 💡 データベース手動作成用の隠しコマンドURL
+# ==========================================
 @app.route('/init-db')
 def init_db():
     db.create_all()
     return "<h1>データベースの作成が完了しました！アプリに戻って登録してください。</h1>"
+
+
+# ==========================================
+# 🚀 アプリケーション起動
+# ==========================================
+if __name__ == '__main__':
+    app.run(debug=True)
