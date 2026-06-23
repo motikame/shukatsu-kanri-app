@@ -112,3 +112,7 @@ def register():
         existing_user = User.query.filter_by(username=username).first()
         if existing_user:
             return
+@app.route('/init-db')
+def init_db():
+    db.create_all()
+    return "<h1>データベースの作成が完了しました！アプリに戻って登録してください。</h1>"
